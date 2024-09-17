@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Table</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/background.jpg" type="image/x-icon">
+</head>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: url(images/background.jpg) ;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 560px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
+<body>
+    <main>
+        <h1 style=" margin-top: 25px; text-align: center; color: white;">Evaluation Table</h1>
+
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <input style=" text-align: center; padding: 10px; border: 2px solid rebeccapurple;  border-top-left-radius: 8px;   border-bottom-left-radius: 8px;  border-top-right-radius: 0;  border-bottom-right-radius: 0; " type="number" name="Row" placeholder="ROW" id="userInput1">
+            <input style="text-align: center; padding: 10px; border: 2px solid rebeccapurple;   border-top-right-radius: 8px; border-bottom-right-radius: 8px;  border-top-left-radius: 0;  border-bottom-left-radius: 0;" type="number" name="Column" placeholder="Column" id="userInput2">
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 25px;">
+            <label for="operation" style="color: rebeccapurple; font-size: 25px; font-weight: 700;">Operation:</label>
+            <select id="operation" style="color: rebeccapurple; border: 2px solid rebeccapurple; padding: 10px; border-radius: 8px;">
+                <option value="addition" style="color: rebeccapurple;">Addition</option>
+                <option value="subtraction" style="color: rebeccapurple;">Subtraction</option>
+                <option value="multiplication" style="color: rebeccapurple;">Multiplication</option>
+                <option value="division" style="color: rebeccapurple;">Division</option>
+                <option value="mode of operation" style="color: rebeccapurple;" selected="select">Select Mode Of Operation</option>
+            </select>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <button onclick="checkOperator()" style="background-color: rebeccapurple; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer;" >Check Operation</button>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <div id="tableError" style="color: white; font-size: 17px;"></div>
+           
+        </div>
+    </main>
+
+
+    <script>
+       function checkOperator() { 
+        var operation = document.getElementById('operation').value;
+        var userInput1 = document.getElementById('userInput1').value;
+        var userInput2 = document.getElementById('userInput2').value;
+
+        var userInput1 = Number(userInput1);
+        var userInput2 = Number(userInput2);
+
+        if ( userInput1 === '' || userInput2 === '' || isNaN(userInput1) || isNaN(userInput2) || userInput1 <= 0 || userInput2 <= 0) {
+                tableError.innerHTML = "<p> Kindly Input a Positive Value on both sides and Select Your Desired Mode Of Operation</p>";
+            } else {
+                tableError.style.display = 'block';  
+            }
+            
+            if (operation === "multiplication") {
+                var mul = `<table border='1'>`;
+                for (var i = 1; i <= userInput1; i++) {
+                    mul += `<tr>`;
+                    for (var j = 1; j <= userInput2; j++) {
+                        mul += `<td style = "color: white;>${i} x ${j} = ${i * j}</td>`;
+                    }
+                    mul += `</tr>`;
+                }
+                mul += `</table>`;
+                tableError.innerHTML = mul;
+            }
+
+            if (operation === "addition") {
+                var add = `<table border='1'>`;
+                for (var i = 1; i <= userInput1; i++) {
+                    mul += `<tr>`;
+                    for (var j = 1; j <= userInput2; j++) {
+                        add += `<td style = "color: white;>${i} + ${j} = ${i + j}</td>`;
+                    }
+                    add += `</tr>`;
+                }
+                add += `</table>`;
+                tableError.innerHTML = add;
+            }
+
+            if (operation === "subtraction") {
+                var sub = `<table border='1'>`; 
+                for (var i = 1; i <= userInput1; i++) { 
+                    sub += `<tr>`; 
+                    for (var j = 1; j <= userInput2; j++) { 
+                        sub += `<td style = "color: white;>${i} - ${j} = ${i - j}</td>`;  
+                    }
+                    sub += `</tr>`; 
+                }
+                sub += `</table>`; 
+                tableError.innerHTML = sub; 
+            }
+
+            if (operation === "division") {
+                var div = `<table border='1'>`; 
+                for (var i = 1; i <= userInput1; i++) { 
+                 div += `<tr>`; 
+                    for (var j = 1; j <= userInput2; j++) { 
+                        div += `<td style = "color: white;>${i} / ${j} = ${i / j}</td>`;  
+                    }
+                    div += `</tr>`; 
+                }
+                div += `</table>`; 
+                tableError.innerHTML = div; 
+            }
+        }
+       
+       
+
+       
+       
+    </script>
+</body>
+</html>
